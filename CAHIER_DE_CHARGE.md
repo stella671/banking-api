@@ -1,8 +1,8 @@
-# 📋 CAHIER DE CHARGE - BANKING TRANSACTION API
+# 📋 CAHIER DE CHARGE - GESTION BANCAIRE API
 
 ## 1️⃣ INFORMATIONS GÉNÉRALES
 
-**Projet :** Banking Transaction API - Devoir 304  
+**Projet :** Gestion Bancaire API - Devoir 304  
 **Version :** 2.0.0 (Architecture SOLID)  
 **Date :** 11 avril 2026  
 **Technologie :** Node.js + Express.js  

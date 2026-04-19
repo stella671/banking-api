@@ -1,4 +1,4 @@
-# 🏦 Banking Transaction API — Devoir 304
+# 🏦 Gestion Bancaire API (Devoir 304)
 
 API RESTful pour la gestion de comptes et transactions bancaires.
 

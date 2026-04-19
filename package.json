@@ -1,5 +1,5 @@
 {
-  "name": "banking-transaction-api",
+  "name": "gestion-bancaire-api",
   "version": "1.0.0",
   "description": "API REST pour système de transaction bancaire - Devoir 304",
   "main": "index.js",

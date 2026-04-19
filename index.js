@@ -29,7 +29,7 @@ app.use("/comptes/:id", createTransactionRoutes(transactionController));
 // Route racine - Documentation rapide
 app.get("/", (req, res) => {
   res.json({
-    titre: "Banking Transaction API - Devoir 304",
+    titre: "Gestion Bancaire API",
     version: "2.0.0 (SOLID)",
     architecture: "Layered Architecture with SOLID Principles",
     endpoints: {
@@ -54,9 +54,9 @@ const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "Banking Transaction API",
+      title: "Gestion Bancaire API",
       version: "1.0.0",
-      description: "API de gestion de transactions bancaires - Devoir 304",
+      description: "Système de gestion de comptes et transactions bancaires - Devoir 304",
       contact: {
         name: "Stella Elsa",
       },
