@@ -63,7 +63,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "https://banking-api-gbcx.onrender.com",
+        url: "https://gestion-bancaire-api.onrender.com",
         description: "Serveur de Production (Render)",
       },
       {
