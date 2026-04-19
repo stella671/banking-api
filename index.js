@@ -6,6 +6,8 @@
  */
 
 const express = require("express");
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsdoc = require("swagger-jsdoc");
 const Container = require("./src/container");
 const createAccountRoutes = require("./src/routes/accountRoutes");
 const createTransactionRoutes = require("./src/routes/transactionRoutes");
@@ -47,6 +49,35 @@ app.get("/", (req, res) => {
   });
 });
 
+// Configuration Swagger
+const swaggerOptions = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Banking Transaction API",
+      version: "1.0.0",
+      description: "API de gestion de transactions bancaires - Devoir 304",
+      contact: {
+        name: "Stella Elsa",
+      },
+    },
+    servers: [
+      {
+        url: "https://banking-api-gbcx.onrender.com",
+        description: "Serveur de Production (Render)",
+      },
+      {
+        url: "http://localhost:3001",
+        description: "Serveur Local",
+      },
+    ],
+  },
+  apis: ["./src/routes/*.js"], // Chemin vers les fichiers de routes contenant les annotations
+};
+
+const swaggerDocs = swaggerJsdoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 // Gestion des erreurs 404
 app.use((req, res) => {
   res.status(404).json({ erreur: "Route non trouvée." });
@@ -56,9 +87,8 @@ app.use((req, res) => {
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`✅ Banking API lancée sur http://localhost:${PORT}`);
+  console.log(`📑 Swagger disponible sur http://localhost:${PORT}/api-docs`);
 });
-const swaggerUi = require('swagger-ui-express');
-const swaggerJsdoc = require('swagger-jsdoc');
 
 module.exports = app;
 
