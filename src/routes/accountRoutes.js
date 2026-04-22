@@ -41,30 +41,25 @@ function createAccountRoutes(accountController) {
    * @swagger
    * /comptes:
    *   post:
-   *     summary: Créer un nouveau compte
+   *     summary: Créer un nouveau compte (TC-01)
    *     tags: [Accounts]
    *     requestBody:
    *       required: true
    *       content:
    *         application/json:
    *           schema:
-   *             type: object
-   *             properties:
-   *               nom:
-   *                 type: string
-   *               prenom:
-   *                 type: string
-   *               type:
-   *                 type: string
-   *               soldeInitial:
-   *                 type: number
+   *             $ref: '#/components/schemas/Account'
+   *           examples:
+   *             Cas-Nominal-Stella:
+   *               summary: Test Case 01 - Création valide
+   *               value:
+   *                 nom: "Sankwe"
+   *                 prenom: "Stella"
+   *                 type: "courant"
+   *                 soldeInitial: 10000
    *     responses:
    *       201:
-   *         description: Compte créé
-   *         content:
-   *           application/json:
-   *             schema:
-   *               $ref: '#/components/schemas/Account'
+   *         description: Compte créé avec succès
    */
   router.post('/', (req, res) => accountController.create(req, res));
 
@@ -95,8 +90,6 @@ function createAccountRoutes(accountController) {
    *     responses:
    *       200:
    *         description: Détails du compte
-   *       404:
-   *         description: Compte non trouvé
    */
   router.get('/:id', (req, res) => accountController.detail(req, res));
 
@@ -114,7 +107,7 @@ function createAccountRoutes(accountController) {
    *           type: string
    *     responses:
    *       200:
-   *         description: Solde du compte
+   *         description: Solde actuel
    */
   router.get('/:id/solde', (req, res) => accountController.solde(req, res));
 
@@ -122,7 +115,7 @@ function createAccountRoutes(accountController) {
    * @swagger
    * /comptes/{id}:
    *   delete:
-   *     summary: Supprimer un compte
+   *     summary: Supprimer un compte (TC-05)
    *     tags: [Accounts]
    *     parameters:
    *       - in: path
@@ -133,6 +126,15 @@ function createAccountRoutes(accountController) {
    *     responses:
    *       200:
    *         description: Compte supprimé
+   *       400:
+   *         description: Erreur - Solde non nul (Règle de sécurité)
+   *         content:
+   *           application/json:
+   *             examples:
+   *               Erreur-Securite:
+   *                 summary: Test Case 05 - Solde non nul
+   *                 value:
+   *                   erreur: "Impossible de supprimer un compte dont le solde n'est pas nul"
    */
   router.delete('/:id', (req, res) => accountController.delete(req, res));
 

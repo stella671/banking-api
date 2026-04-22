@@ -34,7 +34,7 @@ function createTransactionRoutes(transactionController) {
    * @swagger
    * /comptes/{id}/depot:
    *   post:
-   *     summary: Effectuer un dépôt sur un compte
+   *     summary: Effectuer un dépôt (TC-02)
    *     tags: [Transactions]
    *     parameters:
    *       - in: path
@@ -53,6 +53,12 @@ function createTransactionRoutes(transactionController) {
    *                 type: number
    *               description:
    *                 type: string
+   *           examples:
+   *             Depot-Valide:
+   *               summary: Test Case 02 - Dépôt de 5000
+   *               value:
+   *                 montant: 5000
+   *                 description: "Dépôt d'épargne"
    *     responses:
    *       200:
    *         description: Dépôt réussi
@@ -63,7 +69,7 @@ function createTransactionRoutes(transactionController) {
    * @swagger
    * /comptes/{id}/retrait:
    *   post:
-   *     summary: Effectuer un retrait sur un compte
+   *     summary: Effectuer un retrait (TC-03)
    *     tags: [Transactions]
    *     parameters:
    *       - in: path
@@ -82,9 +88,24 @@ function createTransactionRoutes(transactionController) {
    *                 type: number
    *               description:
    *                 type: string
+   *           examples:
+   *             Retrait-Echec:
+   *               summary: Test Case 03 - Solde insuffisant
+   *               value:
+   *                 montant: 200000
+   *                 description: "Tentative retrait trop élevé"
    *     responses:
    *       200:
    *         description: Retrait réussi
+   *       400:
+   *         description: Erreur - Solde insuffisant
+   *         content:
+   *           application/json:
+   *             examples:
+   *               Echec-Solde:
+   *                 summary: Résultat attendu pour TC-03
+   *                 value:
+   *                   erreur: "Solde insuffisant pour effectuer ce retrait"
    */
   router.post('/retrait', (req, res) => transactionController.withdraw(req, res));
 
@@ -92,7 +113,7 @@ function createTransactionRoutes(transactionController) {
    * @swagger
    * /comptes/{id}/transactions:
    *   get:
-   *     summary: Historique des transactions d'un compte
+   *     summary: Voir l'historique des transactions (TC-04)
    *     tags: [Transactions]
    *     parameters:
    *       - in: path
@@ -102,7 +123,7 @@ function createTransactionRoutes(transactionController) {
    *           type: string
    *     responses:
    *       200:
-   *         description: Liste des transactions
+   *         description: Liste des transactions détaillée
    */
   router.get('/transactions', (req, res) => transactionController.history(req, res));
 
